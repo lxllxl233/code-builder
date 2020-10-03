@@ -12,3 +12,11 @@
 
 - 运行即可！！！
 
+可以修改生成文件的模板，模板文件在 resource/template 文件夹下
+
+![https://woqi-younai.oss-cn-beijing.aliyuncs.com/avatar/1601708201945OIP.jpeg](https://woqi-younai.oss-cn-beijing.aliyuncs.com/avatar/1601708201945OIP.jpeg)
+
+完善工程可以直接提价 pull request
+
+联系作者 : QQ-227666920
+
