@@ -18,7 +18,7 @@ import java.util.Map;
 @Component
 public class FileCreater implements FileCreaterWork{
     @Override
-    public String readFile(String fileName) {
+    public String readFile(String fileName){
         ClassPathResource classPathResource = new ClassPathResource("template/"+fileName);
         FileReader fileReader = null;
         String result = null;
@@ -28,6 +28,14 @@ public class FileCreater implements FileCreaterWork{
             result = FileCopyUtils.copyToString(fileReader);
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            if (null != fileReader){
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return result;
     }
@@ -70,6 +78,14 @@ public class FileCreater implements FileCreaterWork{
             result = JSON.parseObject(str,new TypeReference<HashMap<String,TypeList>>() {});
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            if (null != fileReader){
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return result;
     }

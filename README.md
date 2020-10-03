@@ -16,7 +16,7 @@
 
 ![https://woqi-younai.oss-cn-beijing.aliyuncs.com/avatar/1601708201945OIP.jpeg](https://woqi-younai.oss-cn-beijing.aliyuncs.com/avatar/1601708201945OIP.jpeg)
 
-完善工程可以直接提价 pull request
+完善工程可以直接提交 pull request
 
 联系作者 : QQ-227666920
 
