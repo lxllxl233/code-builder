@@ -14,7 +14,6 @@ public class CodeBuilderMain {
 
         //全局调度者
         Scheduler scheduler = run.getBean(Scheduler.class);
-
         BuildTemplate buildTemplate = new BuildTemplate();
         buildTemplate
                 //设置项目信息
