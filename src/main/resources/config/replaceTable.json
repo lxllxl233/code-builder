@@ -1,0 +1,98 @@
+{
+  "TINYINT": {
+    "type": "Integer",
+    "packageLine": ""
+  },
+  "SMALLINT": {
+    "type": "Integer",
+    "packageLine": ""
+  },
+  "MEDIUMINT": {
+    "type": "Integer",
+    "packageLine": ""
+  },
+  "INT": {
+    "type": "Integer",
+    "packageLine": ""
+  },
+  "INTEGER": {
+    "type": "Integer",
+    "packageLine": ""
+  },
+  "BIGINT": {
+    "type": "Long",
+    "packageLine": ""
+  },
+  "FLOAT": {
+    "type": "Float",
+    "packageLine": ""
+  },
+  "DOUBLE": {
+    "type": "Double",
+    "packageLine": ""
+  },
+  "DECIMAL": {
+    "type": "BigDecimal",
+    "packageLine": "import java.math.BigDecimal;"
+  },
+  "CHAR": {
+    "type": "String",
+    "packageLine": ""
+  },
+  "VARCHAR": {
+    "type": "String",
+    "packageLine": ""
+  },
+  "TINYBLOB": {
+    "type": "String",
+    "packageLine": ""
+  },
+  "TINYTEXT": {
+    "type": "String",
+    "packageLine": ""
+  },
+  "BLOB": {
+    "type": "String",
+    "packageLine": ""
+  },
+  "TEXT": {
+    "type": "String",
+    "packageLine": ""
+  },
+  "MEDIUMBLOB": {
+    "type": "String",
+    "packageLine": ""
+  },
+  "MEDIUMTEXT": {
+    "type": "String",
+    "packageLine": ""
+  },
+  "LONGBLOB": {
+    "type": "String",
+    "packageLine": ""
+  },
+  "LONGTEXT": {
+    "type": "String",
+    "packageLine": ""
+  },
+  "DATE": {
+    "type": "Date",
+    "packageLine": "import java.util.Date;"
+  },
+  "TIME": {
+    "type": "Date",
+    "packageLine": "import java.util.Date;"
+  },
+  "YEAR": {
+    "type": "Date",
+    "packageLine": "import java.util.Date;"
+  },
+  "DATETIME": {
+    "type": "Date",
+    "packageLine": "import java.util.Date;"
+  },
+  "TIMESTAMP": {
+    "type": "Date",
+    "packageLine": "import java.util.Date;"
+  }
+}

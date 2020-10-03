@@ -1,0 +1,3 @@
+mybatis-plus.mapper-locations=classpath:/xml/*.xml
+server.port=8081
+${mysqlConnection}
