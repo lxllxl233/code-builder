@@ -16,11 +16,11 @@ public class CodeBuilderMain {
         Scheduler scheduler = run.getBean(Scheduler.class);
         BuildTemplate buildTemplate = new BuildTemplate();
         buildTemplate
-                //设置项目信息
-                .outputPath("/home/lxl/testSpace")
-                .projectName("template")
+                //设置项目信息/home/lxl/IdeaProjects
+                .outputPath("/home/lxl/IdeaProjects")
+                .projectName("vipms")
                 //设置包名
-                .packages("com.woqiyounai")
+                .packages("com.vipms.base")
                 .entityPName("entity")
                 .daoPName("dao")
                 .servicePName("service")
@@ -35,11 +35,11 @@ public class CodeBuilderMain {
                 //设置数据库信息(你要生成的项目的)，使用本工程生成项目请修改本工程的配置文件
                 .username("root")
                 .password("root")
-                .url("jdbc:mysql://localhost:3306/app?serverTimezone=GMT%2B8&characterEncoding=UTF-8")
+                .url("jdbc:mysql://localhost:3306/vipms?serverTimezone=GMT%2B8&characterEncoding=UTF-8")
                 .driver("com.mysql.cj.jdbc.Driver")
                 //设置数据库连接信息
-                .schemaName("app")
-                .tables("tb_group","tb_proxy"); //不配置该项就会扫描该schema下的所有表
+                .schemaName("vipms");
+                //.tables("tb_group","tb_proxy"); //不配置该项就会扫描该schema下的所有表
 
         scheduler.setBuildTemplate(buildTemplate);
         scheduler.createProject();

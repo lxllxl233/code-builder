@@ -22,6 +22,7 @@ public class TemplateBuilder {
     private String testTemplate;
     private String xmlTemplate;
     private String mainTemplate;
+    private String configTemplate;
 
     @Autowired
     private FileCreaterWork fileCreaterWork;
@@ -83,14 +84,14 @@ public class TemplateBuilder {
             tempTemplate = replaceTemplateImport(tempTemplate,entityImport,daoImport,serviceImport,serviceImplImport,controllerImport);
             tempTemplate = replaceTemplatePackage(tempTemplate,entityPackage,daoPackage,servicePackage,serviceImplPackage,controllerPackage);
             buildController(tempTemplate,javaPath+"/"+buildTemplate.getControllerPName()+"/"+controllerName+".java");
-
-            buildPom(pomTemplate,buildTemplate.getOutputPath()+"/"+buildTemplate.getProjectName()+"/pom.xml",buildTemplate);
-            buildTest(testTemplate,testPath+"/TemplateTests.java",buildTemplate.getPackages());
             buildXml(xmlTemplate,buildTemplate.getOutputPath()+"/"+buildTemplate.getProjectName()+"/src/main/resources/xml/"+daoName+".xml",buildTemplate.getPackages()+"."+buildTemplate.getDaoPName()+"."+daoName);
-            buildProperties(propertiesTemplate,buildTemplate.getOutputPath()+"/"+buildTemplate.getProjectName()+"/src/main/resources/application.properties",buildTemplate);
-            String mainName = buildTemplate.getProjectName().substring(0,1).toUpperCase()+buildTemplate.getProjectName().substring(1)+"Main";
-            buildMain(mainTemplate,javaPath+"/"+mainName+".java","package "+buildTemplate.getPackages()+";",mainName);
         });
+        buildPom(pomTemplate,buildTemplate.getOutputPath()+"/"+buildTemplate.getProjectName()+"/pom.xml",buildTemplate);
+        buildProperties(propertiesTemplate,buildTemplate.getOutputPath()+"/"+buildTemplate.getProjectName()+"/src/main/resources/application.properties",buildTemplate);
+        buildTest(testTemplate,testPath+"/TemplateTests.java",buildTemplate.getPackages());
+        String mainName = buildTemplate.getProjectName().substring(0,1).toUpperCase()+buildTemplate.getProjectName().substring(1)+"Main";
+        buildMain(mainTemplate,javaPath+"/"+mainName+".java","package "+buildTemplate.getPackages()+";",mainName);
+        buildConfig(configTemplate,javaPath+"/config/SwaggerConfig.java","package "+buildTemplate.getPackages()+".config;");
     }
 
     public String replaceTemplateImport(String template,String entityImport,String daoImport,String serviceImport,String serviceImplImport,String controllerImport){
@@ -182,6 +183,11 @@ public class TemplateBuilder {
         fileCreaterWork.createFile(path,template);
     }
 
+    private void buildConfig(String template,String path,String swaggerPackage){
+        template = template.replace("${swaggerPackage}",swaggerPackage);
+        fileCreaterWork.createFile(path,template);
+    }
+
     private void buildProperties(String template,String path,BuildTemplate buildTemplate){
         String mysqlConn = "spring.datasource.url="+buildTemplate.getUrl()+"\n";
         mysqlConn += "spring.datasource.driver-class-name="+buildTemplate.getDriver()+"\n";
@@ -223,6 +229,7 @@ public class TemplateBuilder {
         testTemplate = fileCreaterWork.readFile("test.temp");
         xmlTemplate = fileCreaterWork.readFile("xml.temp");
         mainTemplate = fileCreaterWork.readFile("main.temp");
+        configTemplate = fileCreaterWork.readFile("swagger-config.temp");
         replaceTemplate.readReplaceTemplate();
         System.out.println("读取模板文件完毕");
     }

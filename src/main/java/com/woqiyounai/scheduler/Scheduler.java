@@ -78,5 +78,6 @@ public class Scheduler {
         new File(basePath + "/" + buildTemplate.getServicePName()).mkdir();
         new File(basePath + "/" + buildTemplate.getServicePName() +"/"+ buildTemplate.getServiceImplPName()).mkdir();
         new File(basePath + "/" + buildTemplate.getControllerPName()).mkdir();
+        new File(basePath + "/config").mkdir();
     }
 }
