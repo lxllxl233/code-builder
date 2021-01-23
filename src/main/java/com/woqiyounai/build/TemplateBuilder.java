@@ -1,5 +1,6 @@
 package com.woqiyounai.build;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.woqiyounai.entity.Columns;
 import com.woqiyounai.output.FileCreaterWork;
 import com.woqiyounai.util.CodeUtils;
@@ -59,7 +60,7 @@ public class TemplateBuilder {
             tempTemplate = replaceTemplateName(tempTemplate,entityName,daoName,serviceName,serviceImplName,controllerName);
             tempTemplate = replaceTemplateImport(tempTemplate,entityImport,daoImport,serviceImport,serviceImplImport,controllerImport);
             tempTemplate = replaceTemplatePackage(tempTemplate,entityPackage,daoPackage,servicePackage,serviceImplPackage,controllerPackage);
-            buildEntity(tempTemplate,columns,javaPath+"/"+buildTemplate.getEntityPName()+"/"+entityName+".java");
+            buildEntity(tempTemplate,columns,javaPath+"/"+buildTemplate.getEntityPName()+"/"+entityName+".java",buildTemplate.getIdType());
 
             tempTemplate = daoTemplate;
             tempTemplate = replaceTemplateName(tempTemplate,entityName,daoName,serviceName,serviceImplName,controllerName);
@@ -125,12 +126,13 @@ public class TemplateBuilder {
     }
 
     //构建 entity 文件
-    private void buildEntity(String template,List<Columns> columns,String path){
+    private void buildEntity(String template,List<Columns> columns,String path,IdType idType){
         String properties = "";
         for (Columns column : columns) {
             properties = properties + ("\t@ApiModelProperty(value = \""+column.getColumnComment()+"\")\n");
             if (column.getColumnKey().equals("PRI")){
-                properties = properties + ("\t@TableId(value = \""+column.getColumnName()+"\", type = IdType.AUTO)\n");
+                properties = properties + ("\t@TableId(value = \""+column.getColumnName()+"\", type =  IdType."+idType+")\n");
+
             }
             String columnName = CodeUtils.toHumpName(column.getColumnName());
             properties = properties + "\tprivate "+
@@ -232,5 +234,13 @@ public class TemplateBuilder {
         configTemplate = fileCreaterWork.readFile("swagger-config.temp");
         replaceTemplate.readReplaceTemplate();
         System.out.println("读取模板文件完毕");
+    }
+
+
+    public static void main(String[] args) {
+        IdType[] values = IdType.values();
+        for (IdType value : values) {
+            System.out.println(value);
+        }
     }
 }

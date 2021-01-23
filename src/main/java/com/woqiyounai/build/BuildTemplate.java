@@ -1,5 +1,6 @@
 package com.woqiyounai.build;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.woqiyounai.entity.Columns;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,6 +50,9 @@ public class BuildTemplate<tables> {
     private String schemaName;
     private String[] tables;
     private boolean useAll = true;
+
+    //主键生成策略
+    private IdType idType;
 
     public BuildTemplate outputPath(String outputPath) {
         this.outputPath = outputPath;
@@ -163,6 +167,11 @@ public class BuildTemplate<tables> {
     public BuildTemplate tables(String... tables){
         this.tables = tables.clone();
         this.useAll = false;
+        return this;
+    }
+
+    public BuildTemplate idType(IdType idType){
+        this.idType = idType;
         return this;
     }
 
