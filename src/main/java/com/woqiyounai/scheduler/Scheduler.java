@@ -74,6 +74,11 @@ public class Scheduler {
         }
         this.filePath = basePath;
         new File(basePath + "/" + buildTemplate.getEntityPName()).mkdir();
+        //创建vo,dto
+        new File(basePath+"/"+buildTemplate.getEntityPName()+"/vo").mkdir();
+        new File(basePath+"/"+buildTemplate.getEntityPName()+"/dto").mkdir();
+        //创建 util 包
+        new File(basePath+"/util").mkdir();
         new File(basePath + "/" + buildTemplate.getDaoPName()).mkdir();
         new File(basePath + "/" + buildTemplate.getServicePName()).mkdir();
         new File(basePath + "/" + buildTemplate.getServicePName() +"/"+ buildTemplate.getServiceImplPName()).mkdir();

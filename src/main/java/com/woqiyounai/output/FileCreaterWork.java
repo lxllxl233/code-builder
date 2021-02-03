@@ -1,6 +1,4 @@
 package com.woqiyounai.output;
-
-
 import com.woqiyounai.entity.TypeList;
 
 import java.util.Map;

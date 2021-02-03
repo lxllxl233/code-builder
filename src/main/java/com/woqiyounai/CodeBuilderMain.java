@@ -18,9 +18,9 @@ public class CodeBuilderMain {
         buildTemplate
                 //设置项目信息/home/lxl/IdeaProjects
                 .outputPath("/home/lxl/IdeaProjects")
-                .projectName("rfid")
+                .projectName("buildpro")
                 //设置包名
-                .packages("com.woqiyounai")
+                .packages("com.pingjiao")
                 .entityPName("entity")
                 .daoPName("mapper")
                 .servicePName("service")
@@ -33,15 +33,16 @@ public class CodeBuilderMain {
                 .serviceImplSuffix("Impl")
                 .controllerPrefix("").controllerSuffix("Controller")
                 //设置数据库主键生成策略
-                .idType(IdType.AUTO)
+                .idType(IdType.UUID)
                 //设置数据库信息(你要生成的项目的)，使用本工程生成项目请修改本工程的配置文件
                 .username("root")
                 .password("root")
                 .url("jdbc:mysql://127.0.0.1:3306/st?serverTimezone=GMT%2B8&characterEncoding=UTF-8")
                 .driver("com.mysql.cj.jdbc.Driver")
                 //设置数据库连接信息
-                .schemaName("rfid");
-                //.tables("rel_wt_gd"); //不配置该项就会扫描该schema下的所有表
+                .schemaName("pingjiao")
+                .voIgnores("id","updateTime","createTime");//生成 vo 对象忽略的属性
+                //.tables("tb_t_c_e_bind"); //不配置该项就会扫描该schema下的所有表
         //启动调度器
         scheduler.setBuildTemplate(buildTemplate);
         scheduler.createProject();

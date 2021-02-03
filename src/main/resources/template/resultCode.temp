@@ -1,0 +1,8 @@
+${utilPackage}
+
+//状态码工具类
+public interface ResultCode {
+    public static Integer SUCCESS = 2000;
+    public static Integer ERROR   = 5000;
+    public static Integer GLOBAL  = 8888;
+}

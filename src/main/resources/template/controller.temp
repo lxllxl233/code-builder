@@ -1,9 +1,82 @@
 ${controllerPackage}
 
-import org.springframework.web.bind.annotation.RestController;
 
+${entityImport}
+${voImport}
+${serviceImport}
+${utilImport}
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@Api(tags = "restful crud接口")
 @CrossOrigin
 @RestController
 public class ${controllerName} {
+
+      @Autowired
+      private ${serviceName} ${serviceParamName};
+
+      @GetMapping("/api/${entityName}/getAll")
+      @ApiOperation("获取所有")
+        public RStatic getAll(){
+            List<${entityName}> list = ${serviceParamName}.list();
+            return RStatic.ok("获取成功")
+                    .data("info",list);
+        }
+
+        @GetMapping("/api/${entityName}/getAllByPage")
+        @ApiOperation("根据分页获取所有")
+        public RStatic getAllByPage(int currentPage,int maxSize){
+            IPage<${entityName}> userPage = new Page<>(currentPage, maxSize);
+            IPage<${entityName}> page = ${serviceParamName}.page(userPage);
+            return RStatic.ok("获取成功")
+                    .data("info",page);
+        }
+
+        @GetMapping("/api/${entityName}/restOpt/{id}")
+        @ApiOperation("获取一个")
+        public RStatic getOne(@PathVariable("id") String id){
+            ${entityName} byId = ${serviceParamName}.getById(id);
+            return RStatic.ok("获取成功")
+                    .data("info",byId);
+        }
+
+        @PostMapping("/api/${entityName}/restOpt")
+        @ApiOperation("添加元素")
+        public RStatic add(@RequestBody ${voName} vo){
+            ${entityName} entity = new ${entityName}();
+            BeanUtils.copyProperties(vo,entity);
+            boolean isSave = ${serviceParamName}.save(entity);
+            return RStatic.ok("添加成功")
+                    .data("success",isSave);
+        }
+
+        @PatchMapping("/api/${entityName}/restOpt/{id}")
+        @ApiOperation("修改元素")
+        public RStatic update(@PathVariable("id") String id,@RequestBody ${voName} vo){
+            ${entityName} byId = ${serviceParamName}.getById(id);
+            if (null == byId){
+                return RStatic.error("没有或找不到资源");
+            }
+            BeanUtils.copyProperties(vo,byId);
+            boolean isUpdate = ${serviceParamName}.updateById(byId);
+            return RStatic.ok("修改成功")
+                    .data("success",isUpdate)
+                    .data("info",byId);
+        }
+
+        @DeleteMapping("/api/${entityName}/restOpt/{id}")
+        @ApiOperation("删除元素")
+        public RStatic delete(@PathVariable("id") String id){
+            boolean isDelete = ${serviceParamName}.removeById(id);
+            return RStatic.ok("删除成功")
+                    .data("success",isDelete);
+        }
 
 }

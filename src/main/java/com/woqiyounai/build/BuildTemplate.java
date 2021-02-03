@@ -6,17 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+
 
 //项目模板类，根据该模板生成项目
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
 public class BuildTemplate<tables> {
     private String outputPath;//项目输出路径
 
@@ -53,6 +52,9 @@ public class BuildTemplate<tables> {
 
     //主键生成策略
     private IdType idType;
+
+    //vo对象
+    private String[] voIgnores;
 
     public BuildTemplate outputPath(String outputPath) {
         this.outputPath = outputPath;
@@ -167,6 +169,11 @@ public class BuildTemplate<tables> {
     public BuildTemplate tables(String... tables){
         this.tables = tables.clone();
         this.useAll = false;
+        return this;
+    }
+
+    public BuildTemplate voIgnores(String... voIgnores){
+        this.voIgnores = voIgnores.clone();
         return this;
     }
 
