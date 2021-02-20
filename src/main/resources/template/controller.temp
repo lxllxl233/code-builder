@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Api(tags = "restful crud接口")
 @CrossOrigin
@@ -78,5 +79,38 @@ public class ${controllerName} {
             return RStatic.ok("删除成功")
                     .data("success",isDelete);
         }
+
+         //批量添加元素
+            @PostMapping("/api/${entityName}/addBatch")
+            @ApiOperation("批量添加元素")
+            public RStatic addBatch(@RequestBody List<${voName}> voList){
+                List<${entityName}> batchList = voList.stream().map((e) -> {
+                    ${entityName} entity = new ${entityName}();
+                    BeanUtils.copyProperties(e, entity);
+                    return entity;
+                }).collect(Collectors.toList());
+                boolean b = ${serviceParamName}.saveBatch(batchList);
+                return RStatic.ok("批量添加成功")
+                        .data("success",b)
+                        .data("info",batchList);
+            }
+            //批量修改元素
+            @PostMapping("/api/${entityName}/updateBatch")
+            @ApiOperation("批量修改元素")
+            public RStatic updateBatch(@RequestBody List<${entityName}> entityList){
+                boolean b = ${serviceParamName}.updateBatchById(entityList);
+                return RStatic.ok("批量修改成功")
+                        .data("success",b)
+                        .data("info",entityList);
+            }
+            //批量删除元素
+            @PostMapping("/api/${entityName}/removeBatch")
+            @ApiOperation("批量删除元素，默认 id 为 String 类型")
+            public RStatic removeBatch(List<String> ids){
+                boolean b = ${serviceParamName}.removeByIds(ids);
+                return RStatic.ok("批量删除成功")
+                        .data("success",b)
+                        .data("info",ids);
+            }
 
 }
